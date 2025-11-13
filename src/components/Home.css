@@ -1,0 +1,24 @@
+.home-section {
+  display: flex;
+  padding: 55px;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.home-section > h1 {
+  color: #fff;
+
+}
+
+.home-cards {
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* gap: 20px; */
+  /* justify-content: flex-start; */
+}
+
+/* .home-cards > * {
+  flex: 1 1 300px; 
+  max-width: 350px;
+} */

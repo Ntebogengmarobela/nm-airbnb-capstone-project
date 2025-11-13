@@ -1,11 +1,13 @@
 import React from 'react'
+import heroImage from "../assets/hero-image-air.jpg";
 import "./Banner.css";
 
 const Banner = () => {
   return (
     <div className="banner">
       <img
-        src="https://a0.muscache.com/im/pictures/6af06f29-43ab-43c7-a899-7b93746ce5db.jpg?im_w=1200"
+        // src="https://media.cntraveller.com/photos/67befadb4b331bedfbb24181/master/w_2048%2Cc_limit/best%2520airbnbs%2520cape%2520town4-feb25.jpeg"
+        src={heroImage}
         alt=""
       />
     </div>
