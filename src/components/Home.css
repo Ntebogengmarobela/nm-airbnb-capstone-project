@@ -1,24 +1,90 @@
 .home-section {
   display: flex;
-  padding: 55px;
+ 
+  padding: 60px 80px;
   justify-content: center;
-  text-align: center;
   flex-direction: column;
+  gap: 40px; 
 }
 
 .home-section > h1 {
   color: #fff;
-
 }
 
 .home-cards {
   display: flex;
   /* flex-wrap: wrap; */
-  /* gap: 20px; */
-  /* justify-content: flex-start; */
+  gap: 25px;
+  justify-content: flex-start;
+  width: 100%;
 }
 
-/* .home-cards > * {
-  flex: 1 1 300px; 
-  max-width: 350px;
-} */
+.shop-airbnb > h1 {
+  color: #fff;
+  white-space: wrap !important;
+
+}
+
+/* Gift Section */
+.gift-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 0;
+  width: 100%;
+}
+
+.gift-text h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.gift-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 56, 92, 0.6);
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.gift-btn:hover {
+  background-color:#ff385c ;
+  color: #fff;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 25px rgba(255, 56, 92, 0.3);
+}
+
+
+.gift-images {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.gift-img {
+  width: 180px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+  border: 1px solid rgba(255, 56, 92, 0.6);
+}
+
+.img1 {
+  transform: rotate(-10deg);
+}
+.img2 {
+  transform: rotate(5deg);
+}
+.img3 {
+  transform: rotate(12deg);
+}
+
+.gift-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(255, 56, 92, 0.3);
+ 
+}

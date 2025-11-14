@@ -1,7 +1,7 @@
 .card {
   width: 100%;
   max-width: 350px;
-  margin: 10px;
+  /* margin: 10px; */
   border-radius: 10px;
   border: 1px solid rgba(255, 56, 92, 0.6);
   /* box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75); */
@@ -26,8 +26,9 @@
 
 .card-info {
   padding: 16px;
-  /* border: 1px solid rgba(255, 56, 92, 0.6); */
-
+  border-top: 1px solid rgba(255, 56, 92, 0.6);
+  text-align: center;
+  justify-content: center;
   /* border-top: 1px solid #eee; */
   /* background-color: #fff; */
   /* background-color: #ff385c; */
@@ -38,7 +39,6 @@
   background-color: #ff385c;
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
 }
-
 
 .card-info > h2 {
   font-size: 18px;
@@ -53,4 +53,93 @@
   margin-top: 8px;
   color: #fff;
   /* color: #555; */
+}
+
+.card-discover {
+  width: 100%;
+  max-width: 350px;
+  /* margin: 10px; */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 56, 92, 0.6);
+  /* box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75); */
+  transition: transform 200ms ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+  /* background-color: white; */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-discover img {
+  height: 350px;
+  object-fit: cover;
+}
+
+.card-discover .card-info {
+  display: none;
+}
+
+.discover-card {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 56, 92, 0.6);
+  overflow: hidden;
+}
+
+.discover-card img {
+  width: 100%;
+  height: 350px;  
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.discover-card .card-info {
+  display: none;
+}
+
+.discover-overlay {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  color: white;
+  z-index: 10;
+}
+
+.discover-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2em;
+  margin: 0 0 15px 0;
+}
+
+.discover-btn {
+  background-color: #000;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  border: 1px solid rgba(255, 56, 92, 0.6);
+}
+
+.discover-btn:hover {
+  background-color: #ff385c;
+  color: #fff;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 25px rgba(255, 56, 92, 0.3);
+}
+
+.discover-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.4),
+    rgba(0,0,0,0)
+  );
+  z-index: 1;
 }

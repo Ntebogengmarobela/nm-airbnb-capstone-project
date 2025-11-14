@@ -2,6 +2,7 @@ import React from 'react'
 import Banner from './Banner'
 import Card from "./Card";
 import "./Home.css";
+import discoverImage from "../assets/discover-img.png";
 
 const Home = () => {
   return (
@@ -35,6 +36,54 @@ const Home = () => {
             title="Phucket"
             description="Thailand"
           />
+        </div>
+      </div>
+      <div className="home-section discover">
+        <h1>Discover Airbnb Experinces</h1>
+        <div className="home-cards">
+          <Card
+            src="https://a0.muscache.com/im/pictures/Mt/MtTemplate-3962848/original/d9d5bf6c-266c-4751-8bce-4239e32f0299.jpeg?im_w=1920"
+            variant="discover"
+            title="Things to do on your trip"
+            description="Experiences"
+          />
+
+          <Card
+            src={discoverImage}
+            variant="discover"
+            title="Things to do from home"
+            description="Online Experiences"
+          />
+        </div>
+      </div>
+      <div className="home-section">
+        <div className="gift-section">
+          <div className="gift-text">
+            <h2>
+              Shop Airbnb
+              <br />
+              gift cards
+            </h2>
+            <button className="gift-btn">Learn more</button>
+          </div>
+
+          <div className="gift-images">
+            <img
+              src="https://m.media-amazon.com/images/I/714OU-MwAbL.jpg"
+              alt="Gift Card"
+              className="gift-img img1"
+            />
+            <img
+              src="https://storage.googleapis.com/prod-poinz-gift-card/gift-card-images/airbnb_gutschein_chf_50_50.0"
+              alt="Gift Card"
+              className="gift-img img2"
+            />
+            <img
+              src="https://qa-content-s3.launchgiftcards.com/images/0800dea3-3161-4a6b-b4cc-7368c09925c5/holiday_dusk_11zon.png"
+              alt="Gift Card"
+              className="gift-img img3"
+            />
+          </div>
         </div>
       </div>
     </div>
