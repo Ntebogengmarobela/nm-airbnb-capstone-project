@@ -3,21 +3,32 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: #000; */
-  background-color:rgba(0, 0, 0, 0.9);
   width: 100%;
   padding: 0.8rem 2rem;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
+  background-color: rgba(10, 10, 10, 0.25);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
   box-sizing: border-box;
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+  transition: background-color 0.35s ease,
+              box-shadow 0.35s ease,
+              border-bottom 0.35s ease,
+              backdrop-filter 0.35s ease;
+
+  border-bottom: 1px solid transparent;
 }
 
-
-
-
+.header-scrolled {
+  background-color: rgba(10, 10, 10, 0.75);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.45);
+  border-bottom: 1px solid rgba(255, 56, 92, 0.3);
+}
 
 .header-top {
   display: flex;
@@ -30,12 +41,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 56, 92, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+  /* backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px); */
+  /* border: 1px solid rgba(255, 255, 255, 0.08); */
+   border: 1px solid rgba(255, 56, 92, 0.6);
+
   border-radius: 50px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+
   width: 850px;
   max-width: 95%;
   margin: 20px auto;
@@ -43,6 +57,7 @@
   gap: 0.6rem;
   transition: all 0.3s ease;
 }
+
 
 .header-search:hover {
   /* box-shadow: 0 0 12px #FF385C, 0 0 20px rgba(255, 56, 92, 0.4); */
@@ -284,7 +299,7 @@
   /* width: 38px; */
   height: 38px;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.8);
+  /* background: rgba(0, 0, 0, 0.8); */
 }
 
 .account-icon {
@@ -292,7 +307,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  width: 90px;
+  /* width: 90px; */
   height: 38px;
   border-radius: 50px;
   color: white;
@@ -300,6 +315,9 @@
   padding: 0 8px;
   cursor: pointer;
   border: 1px solid rgba(255, 56, 92, 0.6);
+  background: rgba(0, 0, 0, 0.35);
+  
+
 }
 
 .account-icon:hover {

@@ -1,14 +1,17 @@
-import React from 'react'
-import Banner from './Banner'
+import Banner from "./Banner";
 import Card from "./Card";
 import "./Home.css";
 import discoverImage from "../assets/discover-img.png";
+import hostingImage from "../assets/hosting-img-air-crop.jpeg";
+
 
 const Home = () => {
   return (
     <div className="home">
       <Banner />
-      <div className="home-section">
+
+      {/* Inspiration Cards */}
+      <div className="home-section section-cards">
         <h1>Inspiration for your next trip</h1>
         <div className="home-cards">
           <Card
@@ -38,8 +41,10 @@ const Home = () => {
           />
         </div>
       </div>
-      <div className="home-section discover">
-        <h1>Discover Airbnb Experinces</h1>
+
+      {/* Discover Experiences */}
+      <div className="home-section section-discover">
+        <h1>Discover Airbnb Experiences</h1>
         <div className="home-cards">
           <Card
             src="https://a0.muscache.com/im/pictures/Mt/MtTemplate-3962848/original/d9d5bf6c-266c-4751-8bce-4239e32f0299.jpeg?im_w=1920"
@@ -47,7 +52,6 @@ const Home = () => {
             title="Things to do on your trip"
             description="Experiences"
           />
-
           <Card
             src={discoverImage}
             variant="discover"
@@ -56,7 +60,9 @@ const Home = () => {
           />
         </div>
       </div>
-      <div className="home-section">
+
+      {/* Gift Section */}
+      <div className="home-section section-gift">
         <div className="gift-section">
           <div className="gift-text">
             <h2>
@@ -66,7 +72,6 @@ const Home = () => {
             </h2>
             <button className="gift-btn">Learn more</button>
           </div>
-
           <div className="gift-images">
             <img
               src="https://m.media-amazon.com/images/I/714OU-MwAbL.jpg"
@@ -86,8 +91,88 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* Hosting Section */}
+      <div className="home-section section-hosting">
+        <div className="questions-hosting-section">
+          <img src={hostingImage} alt="Hosting" className="hosting-image" />
+          <div className="hosting-content">
+            <h1>
+              Questions
+              <br />
+              about hosting?
+            </h1>
+            <button className="hosting-btn">Ask a super host</button>
+          </div>
+        </div>
+      </div>
+
+      {/* Future Getaways */}
+      <div className="home-section section-getaways">
+        <div className="future-getaways">
+          <h1>Inspiration for future getaways</h1>
+          <div className="future-getaways-tabs">
+            <span className="active">Destinations for arts and culture</span>
+            <span>Destinations for outdoor adventure</span>
+            <span>Mountain cabins</span>
+            <span>Beach destinations</span>
+            <span>Popular destinations</span>
+            <span>Unique stays</span>
+          </div>
+          <div className="future-getaways-grid">
+            <div>
+              <strong>Eiffel Tower</strong>
+              <span>Paris, France</span>
+            </div>
+            <div>
+              <strong>Colosseum</strong>
+              <span>Rome, Italy</span>
+            </div>
+            <div>
+              <strong>Great Wall</strong>
+              <span>Beijing, China</span>
+            </div>
+            <div>
+              <strong>Statue of Liberty</strong>
+              <span>New York, USA</span>
+            </div>
+            <div>
+              <strong>Sydney Opera House</strong>
+              <span>Sydney, Australia</span>
+            </div>
+            <div>
+              <strong>Christ the Redeemer</strong>
+              <span>Rio de Janeiro, Brazil</span>
+            </div>
+            <div>
+              <strong>Shibuya Crossing</strong>
+              <span>Tokyo, Japan</span>
+            </div>
+            <div>
+              <strong>Table Mountain</strong>
+              <span>Cape Town, South Africa</span>
+            </div>
+            <div>
+              <strong>Santorini</strong>
+              <span>Santorini, Greece</span>
+            </div>
+            <div>
+              <strong>Big Ben</strong>
+              <span>London, UK</span>
+            </div>
+            <div>
+              <strong>Sagrada Familia</strong>
+              <span>Barcelona, Spain</span>
+            </div>
+            <div>
+              <strong>Grand Canyon</strong>
+              <span>Arizona, USA</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default Home;

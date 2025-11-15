@@ -4,12 +4,11 @@ import { format } from "date-fns";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "./Header.css";
-
-
 import LanguageIcon from "@mui/icons-material/Language";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [showAccountDropdown, setShowAccountDropdown] = useState(false);
@@ -29,6 +28,17 @@ const Header = () => {
     children: 0,
     infants: 0,
   });
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const accountDropdownRef = useRef(null);
   const locationDropdownRef = useRef(null);
@@ -74,7 +84,7 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Guests logic
+  
   const handleGuestChange = (type, delta) => {
     setGuests((prev) => ({
       ...prev,
@@ -90,13 +100,16 @@ const Header = () => {
       : "Add guests";
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div className="header">
+    <div className={`header ${scrolled ? "header-scrolled" : ""}`}>
       <div className="header-top">
         <div className="header-logo">
           <img
             src="https://images.squarespace-cdn.com/content/v1/5bde0f00c3c16aa95581e2e2/1656015702491-J822CHG9AJYZ6SX0QRVL/Airbnb_Logo_B%C3%A9lo.svg+-+white.png?format=2500w"
             alt="Logo"
+            onClick={() => navigate("/")}
           />
         </div>
 
@@ -108,6 +121,7 @@ const Header = () => {
 
         <div className="header-right">
           <span>Become a host</span>
+
           <div className="language-icon">
             <LanguageIcon />
           </div>
@@ -135,7 +149,10 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      {/* ---------------- SEARCH BAR ---------------- */}
       <div className="header-search">
+        {/* Location */}
         <div className="search-section" ref={locationDropdownRef}>
           <label>Where to</label>
           <input
@@ -145,8 +162,9 @@ const Header = () => {
             onChange={(e) => setLocationInput(e.target.value)}
             onFocus={() => setShowLocationDropdown(true)}
           />
+
           {showLocationDropdown && (
-            <ul className="dropdown glass-panel">
+            <ul className="dropdown glass-panel active">
               {locations
                 .filter((loc) =>
                   loc.toLowerCase().includes(locationInput.toLowerCase())
@@ -165,7 +183,10 @@ const Header = () => {
             </ul>
           )}
         </div>
-        <div className="divider"></div>
+
+        <div className="divider" />
+
+        {/* Check-in */}
         <div className="search-section" ref={checkInRef}>
           <label>Check in</label>
           <input
@@ -174,8 +195,9 @@ const Header = () => {
             value={format(checkInDate, "MMM d")}
             onClick={() => setActiveField("checkin")}
           />
+
           {activeField === "checkin" && (
-            <div className="date-picker-dropdown glass-panel">
+            <div className="date-picker-dropdown active glass-panel">
               <DateRange
                 ranges={[
                   {
@@ -194,7 +216,10 @@ const Header = () => {
             </div>
           )}
         </div>
-        <div className="divider"></div>
+
+        <div className="divider" />
+
+        {/* Check-out */}
         <div className="search-section" ref={checkOutRef}>
           <label>Check out</label>
           <input
@@ -203,8 +228,9 @@ const Header = () => {
             value={format(checkOutDate, "MMM d")}
             onClick={() => setActiveField("checkout")}
           />
+
           {activeField === "checkout" && (
-            <div className="date-picker-dropdown glass-panel">
+            <div className="date-picker-dropdown active glass-panel">
               <DateRange
                 ranges={[
                   {
@@ -224,7 +250,9 @@ const Header = () => {
           )}
         </div>
 
-        <div className="divider"></div>
+        <div className="divider" />
+
+        {/* Guests */}
         <div className="search-section" ref={guestsRef}>
           <label>Who</label>
           <input
@@ -234,13 +262,15 @@ const Header = () => {
             readOnly
             onClick={() => setShowGuestsDropdown((prev) => !prev)}
           />
+
           {showGuestsDropdown && (
-            <div className="dropdown glass-panel guests-dropdown">
+            <div className="dropdown active glass-panel guests-dropdown">
               {["adults", "children", "infants"].map((type) => (
                 <div key={type} className="guest-row">
                   <span className="guest-label">
                     {type.charAt(0).toUpperCase() + type.slice(1)}
                   </span>
+
                   <div className="guest-controls">
                     <button
                       onClick={() => handleGuestChange(type, -1)}
@@ -248,7 +278,9 @@ const Header = () => {
                     >
                       -
                     </button>
+
                     <span>{guests[type]}</span>
+
                     <button onClick={() => handleGuestChange(type, 1)}>
                       +
                     </button>
@@ -258,6 +290,7 @@ const Header = () => {
             </div>
           )}
         </div>
+
         <button className="search-button">
           <SearchIcon />
         </button>

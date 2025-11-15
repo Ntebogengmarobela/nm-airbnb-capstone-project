@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Home from "./components/Home";
+import Footer from "./components/Footer";
 import LoadingScreen from "./components/layout/LoadingScreen";
 import { Routes, Route } from "react-router-dom";
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

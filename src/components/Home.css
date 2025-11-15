@@ -1,43 +1,40 @@
+
 .home-section {
   display: flex;
- 
-  padding: 60px 80px;
-  justify-content: center;
   flex-direction: column;
-  gap: 40px; 
-}
-
-.home-section > h1 {
+  justify-content: center;
+  gap: 30px;
+  padding: 50px 60px;
+  width: 100%;
+  box-sizing: border-box;
   color: #fff;
 }
 
+.section-cards { gap: 30px; }
+.section-discover { gap: 30px; }
+.section-gift { gap: 20px; }
+.section-hosting { gap: 0; padding: 0 60px; }
+.section-getaways { gap: 25px; padding: 40px 60px; }
+.section-footer { padding: 20px 60px; }
+
 .home-cards {
   display: flex;
-  /* flex-wrap: wrap; */
-  gap: 25px;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: flex-start;
   width: 100%;
 }
 
-.shop-airbnb > h1 {
-  color: #fff;
-  white-space: wrap !important;
-
-}
-
-/* Gift Section */
 .gift-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 60px 0;
   width: 100%;
 }
 
 .gift-text h2 {
   font-size: 32px;
   font-weight: 700;
-  color: #fff;
 }
 
 .gift-btn {
@@ -53,12 +50,10 @@
 }
 
 .gift-btn:hover {
-  background-color:#ff385c ;
-  color: #fff;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
-  box-shadow: 0 6px 25px rgba(255, 56, 92, 0.3);
+  background-color: #ff385c;
+  text-shadow: 0 0 6px rgba(255,255,255,0.9);
+  box-shadow: 0 6px 25px rgba(255,56,92,0.3);
 }
-
 
 .gift-images {
   display: flex;
@@ -69,22 +64,157 @@
 .gift-img {
   width: 180px;
   border-radius: 10px;
-  transition: transform 0.2s ease;
-  border: 1px solid rgba(255, 56, 92, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 25px rgba(255,56,92,0.3);
 }
 
-.img1 {
-  transform: rotate(-10deg);
-}
-.img2 {
-  transform: rotate(5deg);
-}
-.img3 {
-  transform: rotate(12deg);
-}
+.img1 { transform: rotate(-10deg); }
+.img2 { transform: rotate(5deg); }
+.img3 { transform: rotate(12deg); }
 
 .gift-img:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 25px rgba(255, 56, 92, 0.3);
- 
+  box-shadow: 0 6px 25px rgba(255,56,92,0.3);
+}
+
+.questions-hosting-section {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.hosting-image {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+  border: 1px solid rgba(255,56,92,0.6);
+}
+
+.hosting-content {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+}
+
+.hosting-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hosting-btn {
+  padding: 12px 20px;
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid rgba(255,56,92,0.6);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.hosting-btn:hover {
+  background-color: #ff385c;
+  text-shadow: 0 0 6px rgba(255,255,255,0.9);
+  box-shadow: 0 6px 25px rgba(255,56,92,0.3);
+}
+
+.future-getaways {
+  padding: 40px 0;
+}
+
+.future-getaways h1 {
+  color: #fff; 
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.future-getaways-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding-bottom: 15px;
+}
+
+.future-getaways-tabs > span {
+  font-size: 0.95rem;
+  font-weight: 400;
+  cursor: pointer;
+  color: #e0e0e0; 
+  padding-bottom: 6px;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.future-getaways-tabs > span:hover,
+.future-getaways-tabs > span.active {
+  color: #fff; 
+  font-weight: 500;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+.future-getaways-tabs > span:hover::after,
+.future-getaways-tabs > span.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background-color: #ff385c;
+  border-radius: 2px;
+  opacity: 1;
+  transform: scaleX(1);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.future-getaways-grid {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 25px;
+  column-gap: 40px;
+}
+
+.future-getaways-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.future-getaways-grid strong {
+  color: #fff; 
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.future-getaways-grid span {
+  color: #b5b5b5; 
+  font-size: 0.88rem;
+}
+
+/* ------------------- RESPONSIVE ------------------- */
+@media (max-width: 900px) {
+  .future-getaways-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 25px;
+  }
+}
+
+@media (max-width: 600px) {
+  .future-getaways-grid {
+    grid-template-columns: 1fr;
+  }
+  .future-getaways-tabs > span {
+    font-size: 0.85rem;
+  }
+  .home-section {
+    padding: 30px 20px;
+    gap: 20px;
+  }
 }
