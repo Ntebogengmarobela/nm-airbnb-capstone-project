@@ -1,11 +1,48 @@
+import { useState } from "react";
 import Banner from "./Banner";
 import Card from "./Card";
 import "./Home.css";
 import discoverImage from "../assets/discover-img.png";
 import hostingImage from "../assets/hosting-img-air-crop.jpeg";
 
-
 const Home = () => {
+
+  const getawayData = {
+    "Destinations for arts and culture": [
+      { title: "Eiffel Tower", location: "Paris, France" },
+      { title: "Colosseum", location: "Rome, Italy" },
+      { title: "Great Wall", location: "Beijing, China" },
+      { title: "Statue of Liberty", location: "New York, USA" },
+      { title: "Sydney Opera House", location: "Sydney, Australia" },
+      { title: "Christ the Redeemer", location: "Rio de Janeiro, Brazil" },
+    ],
+    "Destinations for outdoor adventure": [
+      { title: "Grand Canyon", location: "Arizona, USA" },
+      { title: "Table Mountain", location: "Cape Town, South Africa" },
+      { title: "Patagonia", location: "Argentina/Chile" },
+    ],
+    "Mountain cabins": [
+      { title: "Swiss Alps Cabin", location: "Switzerland" },
+      { title: "Rocky Mountain Cabin", location: "Colorado, USA" },
+    ],
+    "Beach destinations": [
+      { title: "Santorini", location: "Greece" },
+      { title: "Bora Bora", location: "French Polynesia" },
+    ],
+    "Popular destinations": [
+      { title: "Big Ben", location: "London, UK" },
+      { title: "Shibuya Crossing", location: "Tokyo, Japan" },
+    ],
+    "Unique stays": [
+      { title: "Treehouse", location: "Costa Rica" },
+      { title: "Ice Hotel", location: "Sweden" },
+    ],
+  };
+
+  const [activeTab, setActiveTab] = useState(
+    "Destinations for arts and culture"
+  );
+
   return (
     <div className="home">
       <Banner />
@@ -111,63 +148,26 @@ const Home = () => {
       <div className="home-section section-getaways">
         <div className="future-getaways">
           <h1>Inspiration for future getaways</h1>
+
           <div className="future-getaways-tabs">
-            <span className="active">Destinations for arts and culture</span>
-            <span>Destinations for outdoor adventure</span>
-            <span>Mountain cabins</span>
-            <span>Beach destinations</span>
-            <span>Popular destinations</span>
-            <span>Unique stays</span>
+            {Object.keys(getawayData).map((tab) => (
+              <span
+                key={tab}
+                className={tab === activeTab ? "active" : ""}
+                onMouseEnter={() => setActiveTab(tab)} 
+              >
+                {tab}
+              </span>
+            ))}
           </div>
+
           <div className="future-getaways-grid">
-            <div>
-              <strong>Eiffel Tower</strong>
-              <span>Paris, France</span>
-            </div>
-            <div>
-              <strong>Colosseum</strong>
-              <span>Rome, Italy</span>
-            </div>
-            <div>
-              <strong>Great Wall</strong>
-              <span>Beijing, China</span>
-            </div>
-            <div>
-              <strong>Statue of Liberty</strong>
-              <span>New York, USA</span>
-            </div>
-            <div>
-              <strong>Sydney Opera House</strong>
-              <span>Sydney, Australia</span>
-            </div>
-            <div>
-              <strong>Christ the Redeemer</strong>
-              <span>Rio de Janeiro, Brazil</span>
-            </div>
-            <div>
-              <strong>Shibuya Crossing</strong>
-              <span>Tokyo, Japan</span>
-            </div>
-            <div>
-              <strong>Table Mountain</strong>
-              <span>Cape Town, South Africa</span>
-            </div>
-            <div>
-              <strong>Santorini</strong>
-              <span>Santorini, Greece</span>
-            </div>
-            <div>
-              <strong>Big Ben</strong>
-              <span>London, UK</span>
-            </div>
-            <div>
-              <strong>Sagrada Familia</strong>
-              <span>Barcelona, Spain</span>
-            </div>
-            <div>
-              <strong>Grand Canyon</strong>
-              <span>Arizona, USA</span>
-            </div>
+            {getawayData[activeTab].map((item) => (
+              <div key={item.title}>
+                <strong>{item.title}</strong>
+                <span>{item.location}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

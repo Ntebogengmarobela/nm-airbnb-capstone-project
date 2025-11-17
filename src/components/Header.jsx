@@ -8,7 +8,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [showAccountDropdown, setShowAccountDropdown] = useState(false);
@@ -31,11 +31,19 @@ const Header = () => {
 
   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const hideSearch = location.pathname === "/login";
 
+  useEffect(() => {
+    setShowAccountDropdown(false);
+    setShowLocationDropdown(false);
+    setShowGuestsDropdown(false);
+    setActiveField(null);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -84,7 +92,7 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  
+
   const handleGuestChange = (type, delta) => {
     setGuests((prev) => ({
       ...prev,
@@ -99,8 +107,6 @@ const Header = () => {
       ? `${total} guest${total > 1 ? "s" : ""}${infants}`
       : "Add guests";
   };
-
-  const navigate = useNavigate();
 
   return (
     <div className={`header ${scrolled ? "header-scrolled" : ""}`}>
@@ -141,160 +147,170 @@ const Header = () => {
               }`}
             >
               {!isLoggedIn ? (
-                <span onClick={() => setIsLoggedIn(true)}>Log In</span>
+                <span
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
+                  Log In
+                </span>
               ) : (
-                <span onClick={() => setIsLoggedIn(false)}>Log Out</span>
+                <>
+                  <span onClick={() => setIsLoggedIn(false)}>Log Out</span>
+                  <span onClick={() => setIsLoggedIn(false)}>
+                    View Reservations
+                  </span>
+                </>
               )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* ---------------- SEARCH BAR ---------------- */}
-      <div className="header-search">
-        {/* Location */}
-        <div className="search-section" ref={locationDropdownRef}>
-          <label>Where to</label>
-          <input
-            type="text"
-            placeholder="Search destinations"
-            value={locationInput}
-            onChange={(e) => setLocationInput(e.target.value)}
-            onFocus={() => setShowLocationDropdown(true)}
-          />
+      {!hideSearch && (
+        <div className="header-search">
+          {/* Location */}
+          <div className="search-section" ref={locationDropdownRef}>
+            <label>Where to</label>
+            <input
+              type="text"
+              placeholder="Search destinations"
+              value={locationInput}
+              onChange={(e) => setLocationInput(e.target.value)}
+              onFocus={() => setShowLocationDropdown(true)}
+            />
 
-          {showLocationDropdown && (
-            <ul className="dropdown glass-panel active">
-              {locations
-                .filter((loc) =>
-                  loc.toLowerCase().includes(locationInput.toLowerCase())
-                )
-                .map((loc, idx) => (
-                  <li
-                    key={idx}
-                    onClick={() => {
-                      setLocationInput(loc);
-                      setShowLocationDropdown(false);
-                    }}
-                  >
-                    {loc}
-                  </li>
-                ))}
-            </ul>
-          )}
-        </div>
-
-        <div className="divider" />
-
-        {/* Check-in */}
-        <div className="search-section" ref={checkInRef}>
-          <label>Check in</label>
-          <input
-            type="text"
-            readOnly
-            value={format(checkInDate, "MMM d")}
-            onClick={() => setActiveField("checkin")}
-          />
-
-          {activeField === "checkin" && (
-            <div className="date-picker-dropdown active glass-panel">
-              <DateRange
-                ranges={[
-                  {
-                    startDate: checkInDate,
-                    endDate: checkInDate,
-                    key: "checkin",
-                  },
-                ]}
-                onChange={(item) => setCheckInDate(item.checkin.startDate)}
-                moveRangeOnFirstSelection={false}
-                minDate={new Date()}
-                rangeColors={["#FF385C"]}
-                months={1}
-                direction="horizontal"
-              />
-            </div>
-          )}
-        </div>
-
-        <div className="divider" />
-
-        {/* Check-out */}
-        <div className="search-section" ref={checkOutRef}>
-          <label>Check out</label>
-          <input
-            type="text"
-            readOnly
-            value={format(checkOutDate, "MMM d")}
-            onClick={() => setActiveField("checkout")}
-          />
-
-          {activeField === "checkout" && (
-            <div className="date-picker-dropdown active glass-panel">
-              <DateRange
-                ranges={[
-                  {
-                    startDate: checkOutDate,
-                    endDate: checkOutDate,
-                    key: "checkout",
-                  },
-                ]}
-                onChange={(item) => setCheckOutDate(item.checkout.startDate)}
-                moveRangeOnFirstSelection={false}
-                minDate={checkInDate}
-                rangeColors={["#FF385C"]}
-                months={1}
-                direction="horizontal"
-              />
-            </div>
-          )}
-        </div>
-
-        <div className="divider" />
-
-        {/* Guests */}
-        <div className="search-section" ref={guestsRef}>
-          <label>Who</label>
-          <input
-            type="text"
-            className="guests-input"
-            value={getGuestSummary()}
-            readOnly
-            onClick={() => setShowGuestsDropdown((prev) => !prev)}
-          />
-
-          {showGuestsDropdown && (
-            <div className="dropdown active glass-panel guests-dropdown">
-              {["adults", "children", "infants"].map((type) => (
-                <div key={type} className="guest-row">
-                  <span className="guest-label">
-                    {type.charAt(0).toUpperCase() + type.slice(1)}
-                  </span>
-
-                  <div className="guest-controls">
-                    <button
-                      onClick={() => handleGuestChange(type, -1)}
-                      disabled={guests[type] === 0}
+            {showLocationDropdown && (
+              <ul className="dropdown glass-panel active">
+                {locations
+                  .filter((loc) =>
+                    loc.toLowerCase().includes(locationInput.toLowerCase())
+                  )
+                  .map((loc, idx) => (
+                    <li
+                      key={idx}
+                      onClick={() => {
+                        setLocationInput(loc);
+                        setShowLocationDropdown(false);
+                      }}
                     >
-                      -
-                    </button>
+                      {loc}
+                    </li>
+                  ))}
+              </ul>
+            )}
+          </div>
 
-                    <span>{guests[type]}</span>
+          <div className="divider" />
 
-                    <button onClick={() => handleGuestChange(type, 1)}>
-                      +
-                    </button>
+       
+          <div className="search-section" ref={checkInRef}>
+            <label>Check in</label>
+            <input
+              type="text"
+              readOnly
+              value={format(checkInDate, "MMM d")}
+              onClick={() => setActiveField("checkin")}
+            />
+
+            {activeField === "checkin" && (
+              <div className="date-picker-dropdown active glass-panel">
+                <DateRange
+                  ranges={[
+                    {
+                      startDate: checkInDate,
+                      endDate: checkInDate,
+                      key: "checkin",
+                    },
+                  ]}
+                  onChange={(item) => setCheckInDate(item.checkin.startDate)}
+                  moveRangeOnFirstSelection={false}
+                  minDate={new Date()}
+                  rangeColors={["#FF385C"]}
+                  months={1}
+                  direction="horizontal"
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="divider" />
+
+          <div className="search-section" ref={checkOutRef}>
+            <label>Check out</label>
+            <input
+              type="text"
+              readOnly
+              value={format(checkOutDate, "MMM d")}
+              onClick={() => setActiveField("checkout")}
+            />
+
+            {activeField === "checkout" && (
+              <div className="date-picker-dropdown active glass-panel">
+                <DateRange
+                  ranges={[
+                    {
+                      startDate: checkOutDate,
+                      endDate: checkOutDate,
+                      key: "checkout",
+                    },
+                  ]}
+                  onChange={(item) => setCheckOutDate(item.checkout.startDate)}
+                  moveRangeOnFirstSelection={false}
+                  minDate={checkInDate}
+                  rangeColors={["#FF385C"]}
+                  months={1}
+                  direction="horizontal"
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="divider" />
+
+            <div className="search-section" ref={guestsRef}>
+            <label>Who</label>
+            <input
+              type="text"
+              className="guests-input"
+              value={getGuestSummary()}
+              readOnly
+              onClick={() => setShowGuestsDropdown((prev) => !prev)}
+            />
+
+            {showGuestsDropdown && (
+              <div className="dropdown active glass-panel guests-dropdown">
+                {["adults", "children", "infants"].map((type) => (
+                  <div key={type} className="guest-row">
+                    <span className="guest-label">
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </span>
+
+                    <div className="guest-controls">
+                      <button
+                        onClick={() => handleGuestChange(type, -1)}
+                        disabled={guests[type] === 0}
+                      >
+                        -
+                      </button>
+
+                      <span>{guests[type]}</span>
+
+                      <button onClick={() => handleGuestChange(type, 1)}>
+                        +
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                ))}
+              </div>
+            )}
+          </div>
 
-        <button className="search-button">
-          <SearchIcon />
-        </button>
-      </div>
+          <button className="search-button">
+            <SearchIcon />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

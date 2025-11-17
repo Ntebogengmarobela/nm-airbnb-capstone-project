@@ -12,9 +12,9 @@ const Footer = () => {
 
   const langRef = useRef();
   const currRef = useRef();
-  
+
   useEffect(() => {
-    const handleClick = (e) => {
+    const handleClickOutside = (e) => {
       if (langRef.current && !langRef.current.contains(e.target)) {
         setLangOpen(false);
       }
@@ -22,8 +22,8 @@ const Footer = () => {
         setCurrOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -68,12 +68,12 @@ const Footer = () => {
         <p>© 2025 NM-AIRBNB-CAPSTONE-PROJECT · Privacy · Terms</p>
 
         <div className="footer-bottom-right">
-          {/* LANGUAGE DROPDOWN */}
-          <div className="footer-dropdown" ref={langRef}>
-            <div
-              className="footer-click"
-              onClick={() => setLangOpen(!langOpen)}
-            >
+          <div
+            className={`footer-dropdown ${langOpen ? "active" : ""}`}
+            ref={langRef}
+            onClick={() => setLangOpen(!langOpen)}
+          >
+            <div className="footer-click">
               <LanguageIcon className="footer-icon" />
               <span>English</span>
             </div>
@@ -87,11 +87,12 @@ const Footer = () => {
             )}
           </div>
 
-          <div className="footer-dropdown " ref={currRef}>
-            <div
-              className="footer-click"
-              onClick={() => setCurrOpen(!currOpen)}
-            >
+          <div
+            className={`footer-dropdown ${currOpen ? "active" : ""}`}
+            ref={currRef}
+            onClick={() => setCurrOpen(!currOpen)}
+          >
+            <div className="footer-click">
               <CurrencyExchangeIcon className="footer-icon" />
               <span>R ZAR</span>
             </div>
@@ -105,6 +106,7 @@ const Footer = () => {
               </div>
             )}
           </div>
+
           <FacebookIcon className="footer-icon" />
           <XIcon className="footer-icon" />
           <InstagramIcon className="footer-icon" />

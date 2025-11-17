@@ -37,7 +37,7 @@
 
 .card-info:hover {
   background-color: #ff385c;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  /* text-shadow: 0 0 6px rgba(255, 255, 255, 0.9); */
 }
 
 .card-info > h2 {
@@ -128,7 +128,7 @@
 .discover-btn:hover {
   background-color: #ff385c;
   color: #fff;
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.9);
+  /* text-shadow: 0 0 6px rgba(255, 255, 255, 0.9); */
   box-shadow: 0 6px 25px rgba(255, 56, 92, 0.3);
 }
 

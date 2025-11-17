@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Footer from "./components/Footer";
 import LoadingScreen from "./components/layout/LoadingScreen";
 import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </div>
